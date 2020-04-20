@@ -1,0 +1,28 @@
+﻿<Window x:Class="MusikDotNET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusikDotNET"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#FF212121">
+                <MenuItem Header="_File" Background="#FF212121" Foreground="#FFAAAAAA" BorderBrush="#00000000">
+                    <MenuItem Header="_Open" Foreground="#000000" Name="BtnOpenFile">
+
+                    </MenuItem>
+                    <MenuItem Header="_Save" Foreground="#000000" Name="BtnSaveFile">
+
+                    </MenuItem>
+                    <MenuItem Header="_Save as" Foreground="#000000" Name="BtnSaveFileAs">
+
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <StackPanel Name="MainView" Background="#FF595858">
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
