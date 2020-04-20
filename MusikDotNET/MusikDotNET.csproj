@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MusicViews\StringsCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MusicUtils.cs" />
@@ -83,6 +87,9 @@
     </Compile>
     <Compile Include="MusicViews\GuitarMusicView.xaml.cs">
       <DependentUpon>GuitarMusicView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MusicViews\StringsCanvas.xaml.cs">
+      <DependentUpon>StringsCanvas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

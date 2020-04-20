@@ -21,8 +21,8 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <StackPanel Name="MainView" Background="#FF595858">
-            </StackPanel>
+            <DockPanel Name="MainView" Background="#FF595858">
+            </DockPanel>
         </DockPanel>
     </Grid>
 </Window>

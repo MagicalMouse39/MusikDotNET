@@ -7,17 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="800" Background="#FF333334">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.3*" />
+            <RowDefinition Height="8.7*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" Background="#FF333334" Name="TopPanel">
             <TextBlock HorizontalAlignment="Left" Margin="90, 20, 0, 0" Foreground="#FF14AFDC" Width="25" Height="15" Text="+0"/>
         </StackPanel>
-        <Canvas HorizontalAlignment="Left" Height="394" Margin="0,56,0,0" VerticalAlignment="Top" Width="800" Background="#FF595858"/>
-        <Button HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="-" />
-        <Button HorizontalAlignment="Left" Margin="50,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="+" />
-        <CheckBox Content="Simplify" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,5,0,0" Width="100" Foreground="#FF14AFDC" Name="CheckSimplify"/>
-        <Label Content="Notes Layout:" Foreground="#FF14AFDC" HorizontalAlignment="Left" Margin="175,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" SelectedIndex="0" Margin="263,29,0,0" VerticalAlignment="Top" Width="120" >
+        <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="10,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="-" />
+        <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="50,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="+" />
+        <CheckBox Content="Simplify" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,5,0,0" Width="100" Foreground="#FF14AFDC" Name="CheckSimplify"/>
+        <Label Content="Notes Layout:" Grid.Column="0" Grid.Row="0" Foreground="#FF14AFDC" HorizontalAlignment="Left" Margin="175,25,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" SelectedIndex="0" Margin="263,29,0,0" VerticalAlignment="Top" Width="120" >
             <TextBlock Text="Italian"/>
             <TextBlock Text="English"/>
         </ComboBox>
+        <local:StringsCanvas Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Canvas" Margin="0,0,0,-9" />
     </Grid>
 </UserControl>

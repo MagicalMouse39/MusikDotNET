@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace MusikDotNET
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow instance;
+
         private void ShowMusicView(string music)
         {
             string data = music.Substring(music.Split('\n')[0].Length + 1);
@@ -60,11 +63,56 @@ namespace MusikDotNET
                 data += (this.MainView.Children[0] as MusicView).GetMusicString();
                 */
             };
+
+            /*this.SizeChanged += (s, e) =>
+            {
+                if (this.MainView.Children.Count > 0)
+                {
+                    try
+                    {
+                        if (this.MainView.Children[0].GetType() == typeof(GuitarMusicView))
+                        {
+                            (this.MainView.Children[0] as GuitarMusicView).Width = this.Width;
+                            (this.MainView.Children[0] as GuitarMusicView).Height = this.Height;
+                        }
+                        if (this.MainView.Children[0].GetType() == typeof(FluteMusicView))
+                        {
+                            //(this.MainView.Children[0] as FluteMusicView).ReloadMusic();
+                        }
+                    }
+                    catch { }
+                }
+            };
+
+            this.StateChanged += (s, e) =>
+            {
+                Rect screen = SystemParameters.WorkArea;
+                if (this.MainView.Children.Count > 0)
+                {
+                    try
+                    {
+                        if (this.MainView.Children[0].GetType() == typeof(GuitarMusicView))
+                        {
+                            (this.MainView.Children[0] as GuitarMusicView).Width = screen.Width;
+                            (this.MainView.Children[0] as GuitarMusicView).Height = screen.Height;
+                        }
+                        if (this.MainView.Children[0].GetType() == typeof(FluteMusicView))
+                        {
+                            //(this.MainView.Children[0] as FluteMusicView).ReloadMusic();
+                        }
+                    }
+                    catch { }
+                }
+            };*/
         }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            instance = this;
+
+            this.MainView.Children.Add(new GuitarMusicView(""));
 
             HandleEvents();
         }

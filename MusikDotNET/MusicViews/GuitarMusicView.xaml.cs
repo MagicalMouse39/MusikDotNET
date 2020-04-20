@@ -22,10 +22,21 @@ namespace MusikDotNET.MusicViews
     {
         private string data;
 
+        public void ReloadMusic() => this.Canvas.LoadMusic();
+        public void LoadMusic(string music) => this.Canvas.LoadMusic(music);
+
         public GuitarMusicView(string data)
         {
             this.data = data;
             InitializeComponent();
+
+            /*this.SizeChanged += (s, e) =>
+            {
+                this.Canvas.Width = this.Width;
+                this.Canvas.Height = this.Height - this.TopPanel.Height;
+
+                this.TopPanel.Width = this.Width;
+            };*/
         }
     }
 }
