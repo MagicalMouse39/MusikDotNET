@@ -20,23 +20,35 @@ namespace MusikDotNET.MusicViews
     /// </summary>
     public partial class GuitarMusicView : UserControl
     {
+        public enum GuitarViewType
+        {
+            Chords, Tabs
+        }
+
         private string data;
+        private GuitarViewType type;
 
         public void ReloadMusic() => this.Canvas.LoadMusic();
-        public void LoadMusic(string music) => this.Canvas.LoadMusic(music);
+        
+        public void LoadMusic(string music) => this.Canvas.LoadMusic(music, this.type);
 
-        public GuitarMusicView(string data)
+        public GuitarMusicView(string data, GuitarViewType type)
         {
             this.data = data;
+            this.type = type;
             InitializeComponent();
 
-            /*this.SizeChanged += (s, e) =>
-            {
-                this.Canvas.Width = this.Width;
-                this.Canvas.Height = this.Height - this.TopPanel.Height;
+            this.BtnNoteDown.Click += (s, e) => this.Canvas.TranspDown();
+            this.BtnNoteUp.Click += (s, e) => this.Canvas.TranspUp();
 
-                this.TopPanel.Width = this.Width;
-            };*/
+            if (this.type == GuitarViewType.Tabs)
+            {
+                this.LayoutSelector.Visibility = Visibility.Hidden;
+                this.LayoutSelectorLabel.Content = "Notes Layout: Tabs";
+                Grid.SetColumnSpan(this.LayoutSelectorLabel, 2);
+                this.LayoutSelectorLabel.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+            this.LoadMusic(this.data);
         }
     }
 }

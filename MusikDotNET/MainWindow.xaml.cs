@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MusikDotNET.MusicViews.GuitarMusicView;
 
 namespace MusikDotNET
 {
@@ -29,12 +30,24 @@ namespace MusikDotNET
         private void ShowMusicView(string music)
         {
             string data = music.Substring(music.Split('\n')[0].Length + 1);
+            
             switch (music.Split('\n')[0].ToLower().Trim())
             {
                 case "guitar":
                     {
                         this.MainView.Children.Clear();
-                        this.MainView.Children.Add(new GuitarMusicView(data));
+
+                        GuitarViewType type = GuitarViewType.Tabs;
+                        string stype = data.Split('\n')[0];
+                        if (stype.ToLower().StartsWith("tab"))
+                            type = GuitarViewType.Tabs;
+                        else if (stype.ToLower().StartsWith("chord"))
+                            type = GuitarViewType.Chords;
+                        else
+                            return;
+
+                        data = data.Substring(data.Split('\n')[0].Length + 1);
+                        this.MainView.Children.Add(new GuitarMusicView(data, type));
                     }
                     break;
 
@@ -53,6 +66,8 @@ namespace MusikDotNET
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.ShowDialog();
+                if (ofd.FileName == null || ofd.FileName == string.Empty)
+                    return;
                 string music = File.ReadAllText(ofd.FileName);
                 this.ShowMusicView(music);
             };
@@ -63,57 +78,14 @@ namespace MusikDotNET
                 data += (this.MainView.Children[0] as MusicView).GetMusicString();
                 */
             };
-
-            /*this.SizeChanged += (s, e) =>
-            {
-                if (this.MainView.Children.Count > 0)
-                {
-                    try
-                    {
-                        if (this.MainView.Children[0].GetType() == typeof(GuitarMusicView))
-                        {
-                            (this.MainView.Children[0] as GuitarMusicView).Width = this.Width;
-                            (this.MainView.Children[0] as GuitarMusicView).Height = this.Height;
-                        }
-                        if (this.MainView.Children[0].GetType() == typeof(FluteMusicView))
-                        {
-                            //(this.MainView.Children[0] as FluteMusicView).ReloadMusic();
-                        }
-                    }
-                    catch { }
-                }
-            };
-
-            this.StateChanged += (s, e) =>
-            {
-                Rect screen = SystemParameters.WorkArea;
-                if (this.MainView.Children.Count > 0)
-                {
-                    try
-                    {
-                        if (this.MainView.Children[0].GetType() == typeof(GuitarMusicView))
-                        {
-                            (this.MainView.Children[0] as GuitarMusicView).Width = screen.Width;
-                            (this.MainView.Children[0] as GuitarMusicView).Height = screen.Height;
-                        }
-                        if (this.MainView.Children[0].GetType() == typeof(FluteMusicView))
-                        {
-                            //(this.MainView.Children[0] as FluteMusicView).ReloadMusic();
-                        }
-                    }
-                    catch { }
-                }
-            };*/
         }
 
         public MainWindow()
         {
+            MusicUtils.InitNotesDict();
             InitializeComponent();
 
             instance = this;
-
-            this.MainView.Children.Add(new GuitarMusicView(""));
-
             HandleEvents();
         }
     }

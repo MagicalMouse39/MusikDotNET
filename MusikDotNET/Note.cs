@@ -8,43 +8,37 @@ namespace MusikDotNET
 {
     public struct Note
     {
+        public struct GuitarPos
+        {
+            public int String, Pos;
+
+            public GuitarPos(int String, int Pos)
+            {
+                this.String = String;
+                this.Pos = Pos;
+            }
+        }
+
+        public struct FlutePos
+        {
+            public int Pos;
+
+            public FlutePos(int Pos)
+            {
+                this.Pos = Pos;
+            }
+        }
+
+        public GuitarPos GuitarPosition;
+        public FlutePos FlutePosition;
+
         public string Name;
 
-        private bool isFlat;
-        public bool IsFlat
-        {
-            get
-            {
-                return this.isFlat;
-            }
-            set
-            {
-                if (value)
-                    this.isSharp = false;
-                this.isFlat = value;
-            }
-        }
-
-        private bool isSharp;
-        public bool IsSharp
-        {
-            get
-            {
-                return this.isSharp;
-            }
-            set
-            {
-                if (value)
-                    this.isFlat = false;
-                this.isSharp = value;
-            }
-        }
-        
-        public Note(string name, bool isFlat = false, bool isSharp = false)
+        public Note(string name, GuitarPos guitarPos = new GuitarPos(), FlutePos flutePos = new FlutePos())
         {
             this.Name = name;
-            this.isFlat = isFlat;
-            this.isSharp = isSharp;
+            this.GuitarPosition = guitarPos;
+            this.FlutePosition = flutePos;
         }
     }
 }

@@ -8,23 +8,48 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.3*" />
-            <RowDefinition Height="8.7*" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="8.5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" Background="#FF333334" Name="TopPanel">
-            <TextBlock HorizontalAlignment="Left" Margin="90, 20, 0, 0" Foreground="#FF14AFDC" Width="25" Height="15" Text="+0"/>
-        </StackPanel>
-        <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="10,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="-" />
-        <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Margin="50,5,0,0" VerticalAlignment="Top" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="+" />
-        <CheckBox Content="Simplify" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,5,0,0" Width="100" Foreground="#FF14AFDC" Name="CheckSimplify"/>
-        <Label Content="Notes Layout:" Grid.Column="0" Grid.Row="0" Foreground="#FF14AFDC" HorizontalAlignment="Left" Margin="175,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" SelectedIndex="0" Margin="263,29,0,0" VerticalAlignment="Top" Width="120" >
-            <TextBlock Text="Italian"/>
-            <TextBlock Text="English"/>
-        </ComboBox>
-        <local:StringsCanvas Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Canvas" Margin="0,0,0,-9" />
+        <DockPanel HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" Background="#FF333334" Name="TopPanel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width=".45*" />
+                    <ColumnDefinition Width=".45*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="4.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="7*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="90, 20, 0, 0" Foreground="#FF14AFDC" Width="25" Height="15" Text="+0"/>
+                <Button HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="-" Name="BtnNoteDown" />
+                <Button HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" Width="36" Height="46" Background="#FF14AFDC" BorderBrush="#00000000" FontSize="30" Content="+" Name="BtnNoteUp"/>
+                <Grid Grid.Row="1" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Content="Simplify" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="100" Foreground="#FF14AFDC" Name="CheckSimplify"/>
+                    <Label Content="Notes Layout:" Grid.Row="1" Foreground="#FF14AFDC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="LayoutSelectorLabel"/>
+                    <ComboBox HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" SelectedIndex="0" VerticalAlignment="Stretch" Name="LayoutSelector">
+                        <TextBlock Text="Italian"/>
+                        <TextBlock Text="English"/>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </DockPanel>
+        <local:GuitarCanvas Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Canvas" Margin="0,0,0,-9" />
     </Grid>
 </UserControl>
