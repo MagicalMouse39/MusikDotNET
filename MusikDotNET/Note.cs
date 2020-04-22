@@ -12,6 +12,16 @@ namespace MusikDotNET
         {
             public int String, Pos;
 
+            public static bool operator ==(GuitarPos pos1, GuitarPos pos2)
+            {
+                return pos1.Pos == pos2.Pos && pos1.String == pos2.String;
+            }
+
+            public static bool operator !=(GuitarPos pos1, GuitarPos pos2)
+            {
+                return pos1.Pos != pos2.Pos || pos1.String != pos2.String;
+            }
+
             public GuitarPos(int String, int Pos)
             {
                 this.String = String;

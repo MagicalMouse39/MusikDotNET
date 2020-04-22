@@ -40,6 +40,7 @@ namespace MusikDotNET.MusicViews
 
             this.BtnNoteDown.Click += (s, e) => this.Canvas.TranspDown();
             this.BtnNoteUp.Click += (s, e) => this.Canvas.TranspUp();
+            this.LayoutSelector.SelectionChanged += (s, e) => this.Canvas.Translate(LayoutSelector.SelectedIndex == 0 ? NoteLayout.Italian : NoteLayout.English);
 
             if (this.type == GuitarViewType.Tabs)
             {

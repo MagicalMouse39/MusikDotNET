@@ -26,8 +26,17 @@ namespace MusikDotNET
 
         public static void ENGtoIT(ref Note note)
         {
-            string name = note.Name;
-            note.Name = Notes.FirstOrDefault(x => x.Value == name).Key;
+            for (int i = 0; i < itChords.Length; i++)
+                if (note.Name == Notes.Values.ToArray()[i])
+                    note.Name = Notes.Keys.ToArray()[i];
+        }
+
+        public static void Translate(ref Note note, NoteLayout layout)
+        {
+            if (layout == NoteLayout.Italian)
+                ENGtoIT(ref note);
+            else if (layout == NoteLayout.English)
+                ITtoENG(ref note);
         }
 
         public static void TranspUp(ref Note note, NoteLayout layout)
@@ -36,57 +45,57 @@ namespace MusikDotNET
             {
                 case NoteLayout.Italian:
                     {
-                        if (note.Name.StartsWith("DO"))
+                        if (note.Name.StartsWith("DO") && !note.Name.Contains("#"))
                             note.Name = "DO#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("DO#"))
+                        else if (note.Name.StartsWith("DO#"))
                             note.Name = "RE" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("RE"))
+                        else if (note.Name.StartsWith("RE") && !note.Name.Contains("#"))
                             note.Name = "RE#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("RE#"))
+                        else if (note.Name.StartsWith("RE#"))
                             note.Name = "MI" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("MI"))
+                        else if (note.Name.StartsWith("MI") && !note.Name.Contains("#"))
                             note.Name = "FA" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("FA"))
+                        else if (note.Name.StartsWith("FA") && !note.Name.Contains("#"))
                             note.Name = "FA#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("FA#"))
+                        else if (note.Name.StartsWith("FA#"))
                             note.Name = "SOL" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SOL"))
+                        else if (note.Name.StartsWith("SOL") && !note.Name.Contains("#"))
                             note.Name = "SOL#" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SOL#"))
+                        else if (note.Name.StartsWith("SOL#"))
                             note.Name = "LA" + note.Name.Substring(4);
-                        if (note.Name.StartsWith("LA"))
+                        else if (note.Name.StartsWith("LA") && !note.Name.Contains("#"))
                             note.Name = "LA#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("LA#"))
+                        else if (note.Name.StartsWith("LA#"))
                             note.Name = "SI" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SI"))
+                        else if (note.Name.StartsWith("SI") && !note.Name.Contains("#"))
                             note.Name = "DO" + note.Name.Substring(2);
                     }
                     break;
                 case NoteLayout.English:
                     {
-                        if (note.Name.StartsWith("C"))
+                        if (note.Name.StartsWith("C") && !note.Name.Contains("#"))
                             note.Name = "C#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("C#"))
+                        else if (note.Name.StartsWith("C#"))
                             note.Name = "D" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("D"))
+                        else if (note.Name.StartsWith("D") && !note.Name.Contains("#"))
                             note.Name = "D#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("D#"))
+                        else if (note.Name.StartsWith("D#"))
                             note.Name = "E" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("E"))
+                        else if (note.Name.StartsWith("E") && !note.Name.Contains("#"))
                             note.Name = "F" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("F"))
-                            note.Name = "F#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("F#"))
+                        else if (note.Name.StartsWith("F") && !note.Name.Contains("#"))
+                            note.Name = "F#" + note.Name.Substring(1);
+                        else if (note.Name.StartsWith("F#"))
                             note.Name = "G" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("G"))
+                        else if (note.Name.StartsWith("G") && !note.Name.Contains("#"))
                             note.Name = "G#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("G#"))
+                        else if (note.Name.StartsWith("G#"))
                             note.Name = "A" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("A"))
+                        else if (note.Name.StartsWith("A") && !note.Name.Contains("#"))
                             note.Name = "A#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("A#"))
+                        else if (note.Name.StartsWith("A#"))
                             note.Name = "B" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("B"))
+                        else if (note.Name.StartsWith("B") && !note.Name.Contains("#"))
                             note.Name = "C" + note.Name.Substring(1);
                     }
                     break;
@@ -99,57 +108,57 @@ namespace MusikDotNET
             {
                 case NoteLayout.Italian:
                     {
-                        if (note.Name.StartsWith("DO"))
+                        if (note.Name.StartsWith("DO") && !note.Name.Contains("#"))
                             note.Name = "SI" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("DO#"))
+                        else if (note.Name.StartsWith("DO#"))
                             note.Name = "DO" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("RE"))
+                        else if (note.Name.StartsWith("RE") && !note.Name.Contains("#"))
                             note.Name = "DO#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("RE#"))
+                        else if (note.Name.StartsWith("RE#"))
                             note.Name = "RE" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("MI"))
+                        else if (note.Name.StartsWith("MI") && !note.Name.Contains("#"))
                             note.Name = "RE#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("FA"))
+                        else if (note.Name.StartsWith("FA") && !note.Name.Contains("#"))
                             note.Name = "MI" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("FA#"))
+                        else if (note.Name.StartsWith("FA#"))
                             note.Name = "FA" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SOL"))
+                        else if (note.Name.StartsWith("SOL") && !note.Name.Contains("#"))
                             note.Name = "FA#" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SOL#"))
+                        else if (note.Name.StartsWith("SOL#"))
                             note.Name = "SOL" + note.Name.Substring(4);
-                        if (note.Name.StartsWith("LA"))
+                        else if (note.Name.StartsWith("LA") && !note.Name.Contains("#"))
                             note.Name = "SOL#" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("LA#"))
+                        else if (note.Name.StartsWith("LA#"))
                             note.Name = "LA" + note.Name.Substring(3);
-                        if (note.Name.StartsWith("SI"))
+                        else if (note.Name.StartsWith("SI") && !note.Name.Contains("#"))
                             note.Name = "LA#" + note.Name.Substring(2);
                     }
                     break;
                 case NoteLayout.English:
                     {
-                        if (note.Name.StartsWith("C"))
+                        if (note.Name.StartsWith("C") && !note.Name.Contains("#"))
                             note.Name = "B" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("C#"))
+                        else if (note.Name.StartsWith("C#"))
                             note.Name = "C" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("D"))
+                        else if (note.Name.StartsWith("D") && !note.Name.Contains("#"))
                             note.Name = "C#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("D#"))
+                        else if (note.Name.StartsWith("D#"))
                             note.Name = "D" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("E"))
+                        else if (note.Name.StartsWith("E") && !note.Name.Contains("#"))
                             note.Name = "D#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("F"))
+                        else if (note.Name.StartsWith("F") && !note.Name.Contains("#"))
                             note.Name = "E" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("F#"))
+                        else if (note.Name.StartsWith("F#"))
                             note.Name = "F" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("G"))
+                        else if (note.Name.StartsWith("G") && !note.Name.Contains("#"))
                             note.Name = "F#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("G#"))
+                        else if (note.Name.StartsWith("G#"))
                             note.Name = "G" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("A"))
+                        else if (note.Name.StartsWith("A") && !note.Name.Contains("#"))
                             note.Name = "G#" + note.Name.Substring(1);
-                        if (note.Name.StartsWith("A#"))
+                        else if (note.Name.StartsWith("A#"))
                             note.Name = "A" + note.Name.Substring(2);
-                        if (note.Name.StartsWith("B"))
+                        else if (note.Name.StartsWith("B") && !note.Name.Contains("#"))
                             note.Name = "A#" + note.Name.Substring(1);
                     }
                     break;
