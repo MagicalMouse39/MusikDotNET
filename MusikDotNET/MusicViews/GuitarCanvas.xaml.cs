@@ -27,6 +27,7 @@ namespace MusikDotNET.MusicViews
         private NoteLayout layout;
         private List<Note> Notes = new List<Note>();
         public float TextSize = 16;
+        private bool simplified = false;
 
         private double RealWidth { get { return MainWindow.instance.WindowState == WindowState.Maximized ? SystemParameters.WorkArea.Width : MainWindow.instance.Width; } }
         private double RealHeight { get { return MainWindow.instance.WindowState == WindowState.Maximized ? SystemParameters.WorkArea.Height : MainWindow.instance.Height; } }
@@ -134,35 +135,23 @@ namespace MusikDotNET.MusicViews
                                 continue;
                             GuitarPos posit = new GuitarPos(i, c);
                             Note note = new Note(chord, posit);
-                            c = chords.HowMany(note.Name);
+                            c = chords.HowMany(note.Name) * 10;
                             chords.Add(note);
                         }
-                        /*foreach (string chord in MusicUtils.itChords)
-                        {
-                            List<int> poss = music.Split('\n')[i].AllIndexesOf(chord);
-                            foreach (int pos in poss)
-                            {
-                                GuitarPos posit = new GuitarPos(i, pos);
-
-                                if (chords.ContainsNoteByPos(posit) && chords.GetNoteByPos(posit).Name.Length > chord.Length)
-                                    continue;
-                                else if (chords.ContainsNoteByPos(posit) && chords.GetNoteByPos(posit).Name.Length < chord.Length)
-                                    chords.RemoveNoteByPos(posit);
-
-                                Note note = new Note(chord, new GuitarPos(i, pos));
-                                chords.Add(note);
-                            }
-                        }*/
                     }
                     else
                         refMusic += line + "\n\n";
                 }
 
-                for (int i = 1; i < chords.Count; i++)
+                for (int i = 0; i < chords.Count; i++)
                 {
-                    int spacing = chords[i].GuitarPosition.Pos;
                     Note note = chords[i];
-                    note.GuitarPosition.Pos += (int)chords[i - 1].Name.MeasureText(new TextBlock().FontFamily.Source, this.TextSize);
+                    MusicUtils.FlatToSharp(ref note, this.layout);
+                    if (i != 0)
+                    {
+                        int spacing = chords[i].GuitarPosition.Pos;
+                        note.GuitarPosition.Pos += (int)chords[i - 1].Name.MeasureText(new TextBlock().FontFamily.Source, this.TextSize);
+                    }
                     chords[i] = note;
                 }
 
@@ -191,8 +180,8 @@ namespace MusikDotNET.MusicViews
             foreach (Note note in this.Notes)
             {
                 TextBlock noteBlock = new TextBlock();
-                
-                noteBlock.Text = note.Name;
+
+                noteBlock.Text = this.simplified ? MusicUtils.Simplify(note.Name) : note.Name;
                 noteBlock.FontSize = this.TextSize;
                 noteBlock.Foreground = new SolidColorBrush(Color.FromArgb(255, 20, 175, 220));
 
@@ -213,6 +202,12 @@ namespace MusikDotNET.MusicViews
                 MusicUtils.Translate(ref note, layout);
                 this.Notes[i] = note;
             }
+            this.LoadMusic();
+        }
+
+        public void Simplify(bool chkd)
+        {
+            this.simplified = chkd;
             this.LoadMusic();
         }
 
